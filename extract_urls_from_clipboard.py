@@ -1,7 +1,8 @@
 import clipboard
 import re as regex
 
-everything_before_pattern = regex.compile("^(.*?)http")
+# everything_before_pattern = regex.compile("^(.*?)http")
+everything_after_pattern = regex.compile("^(.*?)http")
 text = clipboard.paste()
 textlines = text.splitlines()
 urls = []
@@ -11,7 +12,7 @@ for textline in textlines:
         urls.append(textline)
 
 for url in urls:
-    to_remove = regex.search(everything_before_pattern, url)
+    to_remove = regex.search(everything_after_pattern, url)
     url = url.replace(to_remove.group(0), "http")
     urls_to_copy += url
     urls_to_copy += "\n"
